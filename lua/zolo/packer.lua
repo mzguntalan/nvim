@@ -60,6 +60,7 @@ return require('packer').startup(function(use)
       -- require("toggleterm").setup()
   end}
   use('xiyaowong/transparent.nvim')
+  use('arnamak/stay-centered.nvim')
   -- use('sonph/onehalf')
   -- use('wuelnerdotexe/vim-enfocado')
   -- use('Mofiqul/adwaita.nvim')

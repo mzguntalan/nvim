@@ -1,3 +1,4 @@
+require('config.plugin.stay_centered')
 require('config.plugin.toggleterm')
 require('config.plugin.colorscheme')
 require('config.plugin.gitsigns')
