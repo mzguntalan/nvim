@@ -46,3 +46,10 @@ nvim .
 pip install reorder-python-imports
 pip install black
 ```
+
+## Basics/ Custom Keymaps (Not vim default)
+- Leader = `<space>`
+- Find a file `<leader>fa` (fa = find all)
+- Go to file browser: `<leader>pv`
+- Comment a line: `<leader>cv`
+- Comment a block: `<leader>cc`
