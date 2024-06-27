@@ -61,6 +61,8 @@ return require('packer').startup(function(use)
   end}
   use('xiyaowong/transparent.nvim')
   use('arnamak/stay-centered.nvim')
+  use('preservim/vim-markdown')
+  use('mzguntalan/scratchpad.nvim')
   -- use('sonph/onehalf')
   -- use('wuelnerdotexe/vim-enfocado')
   -- use('Mofiqul/adwaita.nvim')

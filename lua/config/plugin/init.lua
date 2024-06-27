@@ -1,3 +1,5 @@
+require('config.plugin.scratchpad')
+require('config.plugin.markdown')
 require('config.plugin.stay_centered')
 require('config.plugin.toggleterm')
 require('config.plugin.colorscheme')
