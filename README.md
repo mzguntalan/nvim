@@ -46,6 +46,12 @@ nvim .
 pip install reorder-python-imports
 pip install black
 ```
+15. Install the language servers for python and markdown. By entering each one seperately
+```
+:MasonInstall jedi-language-server
+:MasonInstall marksman
+:MasonInstall mypy
+```
 
 ## Basics/ Custom Keymaps (Not vim default)
 - Leader = `<space>`
