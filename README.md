@@ -41,4 +41,8 @@ nvim .
 11. Press q and `:q!` to quit neovim
 12. Reopen neovim by `nvim .`
 13. It will re-initialize everything, if something breaks, quit `:q!` and reopen `nvim .`
-
+14. For python, install black and reorder-python-imports via pip
+```
+pip install reorder-python-imports
+pip install black
+```
