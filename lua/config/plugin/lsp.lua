@@ -1,6 +1,17 @@
 -- Language Servers
 local lspconfig = require("lspconfig")
 
-lspconfig.jedi_language_server.setup({})
-lspconfig.lua_ls.setup{}
-lspconfig.marksman.setup{}
+local custom_attach = function(client)
+    print("LSP Started")
+    -- require('completion').on_attach(client)
+    -- require('diagnostic').on_attach(client)
+
+    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+    vim.keymap.set('n','gs','<cmd>lua vim.lsp.buf.hover()<CR>')
+    vim.keymap.set('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
+end
+
+lspconfig.jedi_language_server.setup({ on_attach=custom_attach })
+lspconfig.lua_ls.setup{ on_attach=custom_attach }
+lspconfig.marksman.setup{ on_attach=custom_attach }
