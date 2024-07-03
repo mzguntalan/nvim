@@ -1,3 +1,20 @@
+
+
+local mode_icons = {
+   n =          " (=^-ω-^=) ",
+   nt =         " (=^-ω-^=) ",
+   i =          "d(=^･ω･^=)b",
+   R =          "=＾● ⋏ ●＾=",
+   v =          " ミ๏ｖ๏彡  ",
+   V =          " ミ๏ｖ๏彡  ",
+   no =         " (^-人-^)  ",
+   ["\22"] =    " (^-人-^)  ",
+   t =          "  (*^ω^*)  ",
+   ['!'] =      "  (^._.^)ﾉ ",
+   c =          " ｡＾･ｪ･＾｡ ",
+   s =          "  (=;ω;=)  "
+}
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
@@ -21,7 +38,11 @@ require('lualine').setup {
     sections = {
         lualine_a = {{
             'mode',
-            fmt = function(str) return "𝐙| " .. str end
+            fmt = function(str)
+
+                return "𝐙| " .. (mode_icons[vim.api.nvim_get_mode().mode] or vim.api.nvim_get_mode().mode) 
+            end
+
         }},
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
