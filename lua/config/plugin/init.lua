@@ -1,3 +1,5 @@
+require('config.plugin.leap')
+require('config.plugin.transparent')
 require('config.plugin.scratchpad')
 require('config.plugin.markdown')
 require('config.plugin.stay_centered')

@@ -39,13 +39,17 @@ require('lualine').setup {
         lualine_a = {{
             'mode',
             fmt = function(str)
-
                 return "𝐙| " .. (mode_icons[vim.api.nvim_get_mode().mode] or vim.api.nvim_get_mode().mode) 
-            end
+            end,
+            color = { fg="#ffffff" },
 
         }},
-        lualine_b = {'branch', 'diff', 'diagnostics'},
-        lualine_c = {'filename'},
+        lualine_b = {
+            {'branch', color={fg="#ffffff"}}, 
+            {'diff', color={fg="#ff0000"}}, 
+            {'diagnostics', color={fg="#ffffff"}}
+        },
+        lualine_c = {{'filename', color={fg="#ffffff"}}},
         lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location'}

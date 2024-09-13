@@ -1,15 +1,16 @@
 local tokyonight = require("tokyonight")
 
+vim.opt.background = "light"
 
 tokyonight.setup({
     style = 'day',
     day_brightness = 0.4,
-    transparent = vim.g.neovide == true,
-    -- on_colors = function(colors) 
-    --     colors.bg = '#000000'
-    -- end,
+    transparent = false,
+    on_colors = function(colors) 
+        colors.bg = '#ffffff'
+    end,
     on_highlights = function(hl, c)
-    local prompt = "#2d3149"
+        local prompt = "#2d3149"
     -- hl.TelescopeNormal = {
     --   bg = c.bg_light,
     --   fg = c.bg_light,

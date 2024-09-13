@@ -63,14 +63,12 @@ return require('packer').startup(function(use)
   use('preservim/vim-markdown')
   use('mzguntalan/scratchpad.nvim')
   use('xiyaowong/transparent.nvim')
-  -- use('sonph/onehalf')
-  -- use('wuelnerdotexe/vim-enfocado')
-  -- use('Mofiqul/adwaita.nvim')
-  -- use('polirritmico/monokai-nightasty.nvim')
-  -- use('nyoom-engineering/oxocarbon.nvim')
-  -- use('sainnhe/edge')
-  -- use('EdenEast/nightfox.nvim')
-  -- use('miikanissi/modus-themes.nvim')
-  -- use('gmr458/cold.nvim')
-  
+  use { "kiyoon/jupynium.nvim", run = "pip3 install --user ." }
+  use { "rcarriga/nvim-notify" }   -- optional
+  use { "stevearc/dressing.nvim" } -- optional, UI for :JupyniumKernelSelect
+  use {
+      'ggandor/leap.nvim',
+      requires = { 'tpope/vim-repeat' }
+  }
+ 
 end)
