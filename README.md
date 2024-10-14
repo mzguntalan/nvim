@@ -59,3 +59,9 @@ pip install black
 - Go to file browser: `<leader>pv`
 - Comment a line: `<leader>cv`
 - Comment a block: `<leader>cc`
+
+
+## FAQ
+- Q: Telescope does not ignore .gitignored files
+  - A: install `ripgrep`
+
