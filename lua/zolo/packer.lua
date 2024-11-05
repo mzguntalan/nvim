@@ -70,4 +70,18 @@ return require('packer').startup(function(use)
       'ggandor/leap.nvim',
       requires = { 'tpope/vim-repeat' }
   }
+  use({
+      "kylechui/nvim-surround",
+      tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+      config = function()
+          require("nvim-surround").setup({
+              -- Configuration here, or leave empty to use defaults
+          })
+      end
+  })
+  use('neovim/nvim-lspconfig')
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
+  use('Julian/lean.nvim')
+  use('RRethy/vim-illuminate')
 end)

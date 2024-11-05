@@ -18,3 +18,6 @@ lspconfig.jedi_language_server.setup({ on_attach=custom_attach })
 lspconfig.lua_ls.setup{ on_attach=custom_attach }
 lspconfig.marksman.setup{ on_attach=custom_attach }
 lspconfig.taplo.setup{ on_attach=custom_attach }
+lspconfig.ts_ls.setup{ }
+lspconfig.tailwindcss.setup{ }
+lspconfig.eslint.setup{ }
