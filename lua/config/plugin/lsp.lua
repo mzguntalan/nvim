@@ -6,6 +6,7 @@ local custom_attach = function(client)
     -- require('completion').on_attach(client)
     -- require('diagnostic').on_attach(client)
 
+    print("attched")
     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
     vim.keymap.set('n','gs','<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -21,3 +22,9 @@ lspconfig.taplo.setup{ on_attach=custom_attach }
 lspconfig.ts_ls.setup{ }
 lspconfig.tailwindcss.setup{ }
 lspconfig.eslint.setup{ }
+lspconfig.futhark_lsp.setup{
+    cmd = { 'futhark', 'lsp' },
+    filetypes = { 'futhark', 'fut' },
+    single_file_support = true,
+    on_attach=custom_attach
+}
