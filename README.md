@@ -53,9 +53,18 @@ pip install black
 :MasonInstall mypy
 ```
 
+## Neorg
+1. Install rocks as it is the easiest way to install neorg
+
 ## Basics/ Custom Keymaps (Not vim default)
 - Leader = `<space>`
 - Find a file `<leader>fa` (fa = find all)
 - Go to file browser: `<leader>pv`
 - Comment a line: `<leader>cv`
 - Comment a block: `<leader>cc`
+
+
+## FAQ
+- Q: Telescope does not ignore .gitignored files
+  - A: install `ripgrep`
+
