@@ -25,11 +25,14 @@ lspconfig.ts_ls.setup({ on_attach=custom_attach })
 lspconfig.sqlls.setup({ on_attach=custom_attach })
 lspconfig.docker_compose_language_service.setup({ on_attach=custom_attach })
 lspconfig.dockerls.setup({ on_attach=custom_attach })
-lspconfig.tailwindcss.setup{ }
-lspconfig.eslint.setup{ }
+lspconfig.tailwindcss.setup{ on_attach=custom_attach }
+lspconfig.eslint.setup{ on_attach=custom_attach }
 lspconfig.futhark_lsp.setup{
     cmd = { 'futhark', 'lsp' },
     filetypes = { 'futhark', 'fut' },
     single_file_support = true,
     on_attach=custom_attach
 }
+lspconfig.gopls.setup{ on_attach=custom_attach }
+lspconfig.sqlls.setup{ on_attach=custom_attach }
+

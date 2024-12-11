@@ -84,4 +84,5 @@ return require('packer').startup(function(use)
   use('MunifTanjim/prettier.nvim')
   use('Julian/lean.nvim')
   use('RRethy/vim-illuminate')
+  use{'supabase-community/postgres_lsp'}
 end)
