@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
   use('williamboman/mason-lspconfig.nvim')
   use('neovim/nvim-lspconfig')
   -- END language
-  use('jose-elias-alvarez/null-ls.nvim')
+  use('nvimtools/none-ls.nvim')
   use {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
