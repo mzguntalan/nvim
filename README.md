@@ -10,6 +10,7 @@ The following languages are supported by this human's nvim
 - javascript / typescript
 - sql
 - futhark
+- zig
 - ocaml
 - go
 - markdown

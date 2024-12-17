@@ -36,3 +36,4 @@ lspconfig.futhark_lsp.setup{
 lspconfig.gopls.setup{ on_attach=custom_attach }
 lspconfig.sqlls.setup{ on_attach=custom_attach }
 lspconfig.ocamllsp.setup{ on_attach=custom_attach }
+lspconfig.zls.setup{ on_attach=custom_attach }
