@@ -1,5 +1,7 @@
 # nvim
 
+![demo](https://github.com/mzguntalan/media_for_other_repo/blob/main/nvim/nvim_demo.png?raw=true)
+
 ## Overview
 
 The following languages are supported by this human's nvim
