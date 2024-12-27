@@ -11,6 +11,7 @@ The following languages are supported by this human's nvim
 - python
 - javascript / typescript
 - sql
+- haskell
 - futhark
 - zig
 - ocaml
