@@ -85,4 +85,5 @@ return require('packer').startup(function(use)
   use('Julian/lean.nvim')
   use('RRethy/vim-illuminate')
   use{'supabase-community/postgres_lsp'}
+  use('mrcjkb/haskell-tools.nvim')
 end)
