@@ -34,7 +34,8 @@ local custom_attach = function(client)
     vim.keymap.set('n', '<leader>hq', ht.repl.quit, opts)
 end
 
-lspconfig.jedi_language_server.setup({ on_attach=custom_attach })
+-- lspconfig.jedi_language_server.setup({ on_attach=custom_attach })
+lspconfig.pyright.setup({ on_attach=custom_attach })
 lspconfig.lua_ls.setup{ on_attach=custom_attach }
 lspconfig.marksman.setup{ on_attach=custom_attach }
 lspconfig.taplo.setup{ on_attach=custom_attach }
@@ -56,4 +57,13 @@ lspconfig.gopls.setup{ on_attach=custom_attach }
 lspconfig.sqlls.setup{ on_attach=custom_attach }
 lspconfig.ocamllsp.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
-lspconfig.hls.setup{ on_attach=custom_attach }
+lspconfig.hls.setup{
+    on_attach=custom_attach,
+    settings = {
+        haskell = {
+            plugin = {
+                rename = {config = {crossModule = true}}
+            }
+        }
+    }
+}

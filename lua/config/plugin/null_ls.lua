@@ -38,6 +38,7 @@ sources = {
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.ocamlformat,
+    null_ls.builtins.formatting.fourmolu,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
