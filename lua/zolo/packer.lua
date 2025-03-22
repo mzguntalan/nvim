@@ -86,4 +86,5 @@ return require('packer').startup(function(use)
   use('RRethy/vim-illuminate')
   use{'supabase-community/postgres_lsp'}
   use('mrcjkb/haskell-tools.nvim')
+  use('mrcjkb/rustaceanvim')
 end)
