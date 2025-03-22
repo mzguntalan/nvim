@@ -37,6 +37,7 @@ end
 -- lspconfig.jedi_language_server.setup({ on_attach=custom_attach })
 lspconfig.pyright.setup({ on_attach=custom_attach })
 lspconfig.lua_ls.setup{ on_attach=custom_attach }
+lspconfig.elixir_ls.setup{ on_attach=custom_attach }
 lspconfig.marksman.setup{ on_attach=custom_attach }
 lspconfig.taplo.setup{ on_attach=custom_attach }
 lspconfig.svelte.setup({ on_attach=custom_attach})
