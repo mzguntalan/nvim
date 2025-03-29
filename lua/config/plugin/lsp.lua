@@ -1,5 +1,12 @@
 -- Language Servers
 local lspconfig = require("lspconfig")
+vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+vim.keymap.set('n','gs','<cmd>lua vim.lsp.buf.hover()<CR>')
+vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.references()<CR>')
+vim.keymap.set('n', '<leader>re', '<cmd>lua vim.lsp.buf.rename()<CR>')
+vim.keymap.set('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
+
 
 local custom_attach = function(client)
     print("LSP Started")
@@ -59,6 +66,7 @@ lspconfig.ocamllsp.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
 lspconfig.rust_analyzer.setup{ on_attach=custom_attach }
+lspconfig.rustfmt.setup{ on_attach=custom_attach }
 lspconfig.hls.setup{
     on_attach=custom_attach,
     settings = {
@@ -69,6 +77,7 @@ lspconfig.hls.setup{
         }
     }
 }
+lspconfig.gleam.setup{  }
 
 -- elixir 
 require("elixir").setup({
