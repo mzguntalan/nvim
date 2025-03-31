@@ -14,11 +14,9 @@ vim.keymap.set("n", "<leader>dd", "<cmd>lua vim.diagnostic.open_float() <CR>")
 
 
 local custom_attach = function(client)
-    print("LSP Started")
     -- require('completion').on_attach(client)
     -- require('diagnostic').on_attach(client)
 
-    print("attched")
     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
     vim.keymap.set('n','gs','<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -29,7 +27,6 @@ local custom_attach = function(client)
     local ht = require('haskell-tools')
     local bufnr = vim.api.nvim_get_current_buf()
     local opts = { noremap = true, silent = true, buffer = bufnr, }
-    print("haskell tools keymaps setup")
     -- haskell-language-server relies heavily on codeLenses,
     -- so auto-refresh (see advanced configuration) is enabled by default
     vim.keymap.set('n', '<space>cl', vim.lsp.codelens.run, opts)

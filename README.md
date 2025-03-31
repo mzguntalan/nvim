@@ -91,10 +91,6 @@ pip install black
 :MasonInstall mypy
 ```
 
-## Neorg
-
-1. Install rocks as it is the easiest way to install neorg
-
 ## Basics/ Custom Keymaps (Not vim default)
 
 - Leader = `<space>`
