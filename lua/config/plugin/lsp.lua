@@ -68,7 +68,6 @@ lspconfig.ocamllsp.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
 lspconfig.rust_analyzer.setup{ on_attach=custom_attach }
-lspconfig.rustfmt.setup{ on_attach=custom_attach }
 lspconfig.hls.setup{
     on_attach=custom_attach,
     settings = {
@@ -82,8 +81,8 @@ lspconfig.hls.setup{
 lspconfig.gleam.setup{  }
 
 -- elixir 
-require("elixir").setup({
-    nextls = {enable = true},
-    elixirls = {enable = false},
-    projectionist = {enable = true},
-})
+-- require("elixir").setup({
+--    nextls = {enable = true},
+--    elixirls = {enable = false},
+--    projectionist = {enable = true},
+-- })
