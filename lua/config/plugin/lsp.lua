@@ -6,6 +6,11 @@ vim.keymap.set('n','gs','<cmd>lua vim.lsp.buf.hover()<CR>')
 vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.references()<CR>')
 vim.keymap.set('n', '<leader>re', '<cmd>lua vim.lsp.buf.rename()<CR>')
 vim.keymap.set('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
+vim.keymap.set("n", '<leader>i', 
+function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}),{0}) 
+end)
+vim.keymap.set("n", "<leader>dd", "<cmd>lua vim.diagnostic.open_float() <CR>")
 
 
 local custom_attach = function(client)
