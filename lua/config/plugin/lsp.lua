@@ -67,7 +67,6 @@ lspconfig.sqlls.setup{ on_attach=custom_attach }
 lspconfig.ocamllsp.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
 lspconfig.zls.setup{ on_attach=custom_attach }
-lspconfig.rust_analyzer.setup{ on_attach=custom_attach }
 lspconfig.hls.setup{
     on_attach=custom_attach,
     settings = {
