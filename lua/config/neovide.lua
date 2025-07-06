@@ -1,5 +1,5 @@
 if vim.g.neovide then
-    vim.o.guifont = "MonaspiceNe Nerd Font Mono:h12" 
+    vim.o.guifont = "MonaspiceNe Nerd Font Mono:h10" 
     vim.g.neovide_padding_top = 4
     vim.g.neovide_padding_bottom = 4
     vim.g.neovide_padding_right = 4
