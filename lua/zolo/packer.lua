@@ -88,4 +88,18 @@ return require('packer').startup(function(use)
   use('mrcjkb/haskell-tools.nvim')
   use('mrcjkb/rustaceanvim')
   use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" }})
+  use {
+      'mzguntalan/vibe-level.nvim',
+      config = function()
+          require('vibe-level').setup(
+              {
+                  ollama_url = "http://localhost:11434",    
+                  model_name = "gemma3:12b",                    
+                  keybind = "<leader>zv",                   
+                  timeout = 30000,
+                  context = "FILE_LEVEL"
+              }
+          )
+      end
+  }
 end)
