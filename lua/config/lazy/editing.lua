@@ -20,7 +20,7 @@ return {
   -- Motion with leap
   {
     'ggandor/leap.nvim',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     dependencies = { 'tpope/vim-repeat' },
     config = function()
       require('config.plugin.leap')
@@ -42,7 +42,7 @@ return {
   -- Stay centered while scrolling
   {
     'arnamak/stay-centered.nvim',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     config = function()
       require('config.plugin.stay_centered')
     end,
@@ -51,7 +51,7 @@ return {
   -- Undo tree
   {
     'mbbill/undotree',
-    cmd = 'UndotreeToggle',
+    event = 'VeryLazy',
     config = function()
       require('config.plugin.undotree')
     end,

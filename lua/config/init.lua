@@ -1,2 +1,2 @@
-require('config.plugin')
-require('config.neovide')
+-- require('config.plugin')
+-- require('config.neovide')

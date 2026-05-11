@@ -10,11 +10,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(require("config.lazy"))
 
 require("zolo")
-require("config")
+-- require("config")
+
 
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
    pattern = "*.fut",
    command = "setfiletype futhark"
 })
+
+if vim.g.neovide then
+  require("config.neovide")
+end
 
 vim.cmd [[filetype plugin on]]

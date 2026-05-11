@@ -2,7 +2,7 @@ return {
   -- LSP configuration
   {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
@@ -17,7 +17,7 @@ return {
   -- LSP server installer
   {
     'williamboman/mason.nvim',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     config = function()
       require('config.plugin.mason')
     end,
@@ -32,7 +32,7 @@ return {
   -- LSP signature help
   {
     'ray-x/lsp_signature.nvim',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     config = function()
       require('config.plugin.lsp_signature')
     end,
@@ -41,7 +41,7 @@ return {
   -- Null-ls for formatters and linters
   {
     'nvimtools/none-ls.nvim',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     config = function()
       require('config.plugin.null_ls')
     end,
