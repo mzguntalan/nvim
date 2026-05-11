@@ -24,7 +24,7 @@ return require('packer').startup(function(use)
   --  end
   -- })
 
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate', branch = "master"})
   use('mbbill/undotree')
   -- language
   use('williamboman/mason.nvim')
