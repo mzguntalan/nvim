@@ -7,9 +7,10 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup(require("config.lazy"))
+
 require("zolo")
 require("config")
-require("lazy").setup(require("config.lazy"))
 
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
    pattern = "*.fut",
