@@ -16,7 +16,11 @@ null_ls.setup({
     null_ls.builtins.formatting.gleam_format
   },
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
+    -- Check if this is a null_ls client or supports formatting
+    local is_null_ls = client.name == "null-ls"
+    local supports_formatting = client.supports_method("textDocument/formatting")
+    
+    if is_null_ls or supports_formatting then
       vim.keymap.set("n", "<Leader>f", function()
         vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
       end, { buffer = bufnr, desc = "[lsp] format" })
