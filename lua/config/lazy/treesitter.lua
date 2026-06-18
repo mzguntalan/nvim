@@ -1,7 +1,7 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    version = 'v0.9.3',  -- last version with pre-compiled parser downloads; no tree-sitter-cli needed
+    branch = 'master',   -- frozen branch; downloads pre-compiled parsers, no tree-sitter-cli needed
     event = 'BufReadPost',
     build = ':TSUpdate',
     config = function()
