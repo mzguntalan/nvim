@@ -7,6 +7,10 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Ensure filetype detection runs before plugins load
+vim.cmd([[filetype plugin indent on]])
+vim.cmd([[syntax enable]])
+
 require("lazy").setup(require("config.lazy"))
 
 require("zolo")
@@ -14,5 +18,3 @@ require("zolo")
 if vim.g.neovide then
     require("config.neovide")
 end
-
-vim.cmd([[filetype plugin on]])
