@@ -1,5 +1,4 @@
 return {
-  -- LSP configuration
   {
     'neovim/nvim-lspconfig',
     event = 'BufReadPost',
@@ -7,28 +6,19 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'nvimtools/none-ls.nvim',
+      -- cmp_nvim_lsp must be available before lsp.lua runs
+      'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
+      -- mason must be set up before mason-lspconfig
+      require('mason').setup()
       require('config.plugin.lsp')
     end,
   },
 
-  -- LSP server installer
-  {
-    'williamboman/mason.nvim',
-    event = 'BufReadPost',
-    config = function()
-      require('config.plugin.mason')
-    end,
-  },
+  { 'williamboman/mason.nvim',           lazy = true },
+  { 'williamboman/mason-lspconfig.nvim', lazy = true },
 
-  -- Bridge between mason and lspconfig
-  {
-    'williamboman/mason-lspconfig.nvim',
-    event = 'BufReadPost',
-  },
-
-  -- None-ls for formatters and linters
   {
     'nvimtools/none-ls.nvim',
     event = 'BufReadPost',
