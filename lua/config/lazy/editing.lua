@@ -19,7 +19,7 @@ return {
 
   -- Motion with leap
   {
-    'ggandor/leap.nvim',
+    url = 'https://codeberg.org/andyg/leap.nvim',
     event = 'VeryLazy',
     dependencies = { 'tpope/vim-repeat' },
     config = function()

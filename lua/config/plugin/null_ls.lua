@@ -1,29 +1,38 @@
 local null_ls = require("null-ls")
+local h = require("null-ls.helpers")
 
--- reorder-python-imports was dropped from none-ls builtins.
--- We call it as a custom formatting source instead.
-local reorder_imports = null_ls.builtins.formatting.reorder_python_imports.with({
-    command = "reorder-python-imports",
-    args = { "-" },
-    to_stdin = true,
+-- reorder-python-imports is not a none-ls builtin.
+-- We define it as a custom formatting generator.
+local reorder_imports = h.make_builtin({
+    name = "reorder-python-imports",
+    meta = { url = "https://github.com/asottile/reorder-python-imports" },
+    method = null_ls.methods.FORMATTING,
+    filetypes = { "python" },
+    generator_opts = {
+        command = "reorder-python-imports",
+        args = { "-" },
+        to_stdin = true,
+    },
+    factory = h.formatter_factory,
 })
 
--- Run reorder-python-imports before black so black sees the final import order.
--- none-ls runs sources in declaration order within the same method.
 null_ls.setup({
     sources = {
-        -- Python
+        -- Python: run import reorder first, then black
         reorder_imports,
         null_ls.builtins.formatting.black,
         null_ls.builtins.diagnostics.mypy.with({
-            -- mypy must be installed in the same env as your project.
-            -- If using virtualenvs, set VIRTUAL_ENV or use mason to install mypy.
             extra_args = { "--ignore-missing-imports" },
         }),
 
-        -- JSON / Markdown (prettier handles both)
+        -- Web / JSON / Markdown via prettier
         null_ls.builtins.formatting.prettier.with({
-            filetypes = { "json", "markdown", "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+            filetypes = {
+                "json", "markdown",
+                "html", "css",
+                "javascript", "typescript",
+                "javascriptreact", "typescriptreact",
+            },
         }),
     },
 
@@ -32,18 +41,16 @@ null_ls.setup({
 
         local opts = { buffer = bufnr, desc = "[lsp] format" }
 
-        -- <Leader>f to format in normal mode
         vim.keymap.set("n", "<Leader>f", function()
             vim.lsp.buf.format({ bufnr = bufnr })
         end, opts)
 
-        -- <Leader>f to format selection in visual mode
         vim.keymap.set("x", "<Leader>f", function()
             vim.lsp.buf.format({ bufnr = bufnr })
         end, opts)
 
-        -- Format on save
-        local group = vim.api.nvim_create_augroup("lsp_format_on_save_" .. bufnr, { clear = true })
+        -- Per-buffer augroup avoids clobbering other buffers' format-on-save
+        local group = vim.api.nvim_create_augroup("null_ls_fmt_" .. bufnr, { clear = true })
         vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
             group = group,
