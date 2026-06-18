@@ -19,7 +19,7 @@ return {
 
   -- Motion with leap
   {
-    'ggandor/leap.nvim',
+    url = 'https://codeberg.org/andyg/leap.nvim',
     event = 'VeryLazy',
     dependencies = { 'tpope/vim-repeat' },
     config = function()
@@ -36,15 +36,6 @@ return {
     event = 'BufReadPost',
     config = function()
       require('config.plugin.nvim_comment')
-    end,
-  },
-
-  -- Stay centered while scrolling
-  {
-    'arnamak/stay-centered.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('config.plugin.stay_centered')
     end,
   },
 

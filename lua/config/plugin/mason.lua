@@ -1,1 +1,1 @@
-require("mason").setup()
+-- mason is set up in lazy/lsp.lua config block

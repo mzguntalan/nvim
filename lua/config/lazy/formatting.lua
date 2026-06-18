@@ -1,14 +1,5 @@
 return {
-  -- Prettier integration
-  {
-    'MunifTanjim/prettier.nvim',
-    event = 'BufReadPost',
-    config = function()
-      require('config.plugin.prettier')
-    end,
-  },
-
-  -- Markdown support
+  -- Markdown support (folding, syntax, etc.)
   {
     'preservim/vim-markdown',
     ft = 'markdown',

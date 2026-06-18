@@ -1,45 +1,48 @@
 local null_ls = require("null-ls")
 
-local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-local event = "BufWritePre" -- or "BufWritePost"
-local async = event == "BufWritePost"
-
 null_ls.setup({
-  sources = {
-    null_ls.builtins.diagnostics.mypy,
-    null_ls.builtins.formatting.reorder_python_imports,
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.gofmt,
-    null_ls.builtins.formatting.ocamlformat,
-    null_ls.builtins.formatting.fourmolu,
-    null_ls.builtins.formatting.gleam_format
-  },
-  on_attach = function(client, bufnr)
-    -- Check if this is a null_ls client or supports formatting
-    local is_null_ls = client.name == "null-ls"
-    
-    if is_null_ls then
-      vim.keymap.set("n", "<Leader>f", function()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = bufnr, desc = "[lsp] format" })
+    sources = {
+        -- Python: isort (PEP 8 import order, deduplication) then black
+        null_ls.builtins.formatting.isort.with({
+            extra_args = { "--profile", "black" },
+        }),
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.diagnostics.mypy.with({
+            extra_args = { "--ignore-missing-imports" },
+        }),
 
-      -- format on save
-      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-      vim.api.nvim_create_autocmd(event, {
-        buffer = bufnr,
-        group = group,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr, async = async })
-        end,
-        desc = "[lsp] format on save",
-      })
-    end
+        -- Web / JSON / Markdown
+        null_ls.builtins.formatting.prettier.with({
+            filetypes = {
+                "json", "markdown",
+                "html", "css",
+                "javascript", "typescript",
+                "javascriptreact", "typescriptreact",
+            },
+        }),
+    },
 
-    if client.supports_method("textDocument/rangeFormatting") then
-      vim.keymap.set("x", "<Leader>f", function()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = bufnr, desc = "[lsp] format" })
-    end
-  end,
+    on_attach = function(client, bufnr)
+        if client.name ~= "null-ls" then return end
+
+        local opts = { buffer = bufnr, desc = "[lsp] format" }
+
+        vim.keymap.set("n", "<Leader>f", function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end, opts)
+
+        vim.keymap.set("x", "<Leader>f", function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end, opts)
+
+        local group = vim.api.nvim_create_augroup("null_ls_fmt_" .. bufnr, { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            group = group,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr, async = false })
+            end,
+            desc = "[lsp] format on save",
+        })
+    end,
 })
