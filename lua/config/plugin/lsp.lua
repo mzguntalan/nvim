@@ -1,73 +1,46 @@
--- Language Servers
 local lspconfig = require("lspconfig")
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- Attach keymaps and configuration when LSP client attaches
+-- Keymaps and config applied when any LSP client attaches
 local custom_attach = function(client, bufnr)
-    -- Buffer-local keymaps (only active when LSP is attached to this buffer)
     local opts = { noremap = true, silent = true, buffer = bufnr }
-    
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.keymap.set('n', '<leader>rf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.keymap.set('n', '<leader>re', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    vim.keymap.set('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.keymap.set("n", '<leader>i', 
-        function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}),{0}) 
-        end, opts)
-    vim.keymap.set("n", "<leader>dd", "<cmd>lua vim.diagnostic.open_float() <CR>", opts)
 
-    -- Haskell-specific keymaps
-    if vim.bo[bufnr].filetype == 'haskell' then
-        local ht = require('haskell-tools')
-        vim.keymap.set('n', '<space>cl', vim.lsp.codelens.run, opts)
-        vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
-        vim.keymap.set('n', '<space>ea', ht.lsp.buf_eval_all, opts)
-        vim.keymap.set('n', '<leader>hr', ht.repl.toggle, opts)
-        vim.keymap.set('n', '<leader>hf', function()
-            ht.repl.toggle(vim.api.nvim_buf_get_name(0))
-        end, opts)
-        vim.keymap.set('n', '<leader>hq', ht.repl.quit, opts)
-    end
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gs', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>rf', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<leader>re', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<leader>af', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>i', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+    end, opts)
+    vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, opts)
+
+    -- Signature help on cursor hold (replaces lsp_signature plugin)
+    vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
 end
 
--- LSP server configurations
-lspconfig.pyright.setup({ on_attach = custom_attach })
-lspconfig.lua_ls.setup({ on_attach = custom_attach })
-lspconfig.marksman.setup({ on_attach = custom_attach })
-lspconfig.taplo.setup({ on_attach = custom_attach })
-lspconfig.svelte.setup({ on_attach = custom_attach })
-lspconfig.ts_ls.setup({ on_attach = custom_attach })
-lspconfig.sqlls.setup({ on_attach = custom_attach })
-lspconfig.docker_compose_language_service.setup({ on_attach = custom_attach })
-lspconfig.dockerls.setup({ on_attach = custom_attach })
-lspconfig.tailwindcss.setup({ on_attach = custom_attach })
-lspconfig.eslint.setup({ on_attach = custom_attach })
-lspconfig.futhark_lsp.setup({
-    cmd = { 'futhark', 'lsp' },
-    filetypes = { 'futhark', 'fut' },
-    single_file_support = true,
-    on_attach = custom_attach
-})
-lspconfig.gopls.setup({ on_attach = custom_attach })
-lspconfig.ocamllsp.setup({ on_attach = custom_attach })
-lspconfig.zls.setup({ on_attach = custom_attach })
-lspconfig.hls.setup({
-    on_attach = custom_attach,
-    settings = {
-        haskell = {
-            plugin = {
-                rename = { config = { crossModule = true } }
-            }
-        }
-    }
-})
-lspconfig.gleam.setup({})
+local function setup(server, opts)
+    opts = opts or {}
+    opts.on_attach = custom_attach
+    opts.capabilities = capabilities
+    lspconfig[server].setup(opts)
+end
 
--- elixir 
--- require("elixir").setup({
---    nextls = {enable = true},
---    elixirls = {enable = false},
---    projectionist = {enable = true},
--- })
+-- Python
+setup('pyright')
+
+-- Lua
+setup('lua_ls')
+
+-- Markdown
+setup('marksman')
+
+-- Web: JS, TS, React
+setup('ts_ls')
+setup('eslint')
+setup('tailwindcss')
+
+-- HTML / CSS (handled well by ts_ls + tailwind, but add if mason installs them)
+-- setup('html')
+-- setup('cssls')

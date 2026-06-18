@@ -1,45 +1,56 @@
 local null_ls = require("null-ls")
 
-local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-local event = "BufWritePre" -- or "BufWritePost"
-local async = event == "BufWritePost"
+-- reorder-python-imports was dropped from none-ls builtins.
+-- We call it as a custom formatting source instead.
+local reorder_imports = null_ls.builtins.formatting.reorder_python_imports.with({
+    command = "reorder-python-imports",
+    args = { "-" },
+    to_stdin = true,
+})
 
+-- Run reorder-python-imports before black so black sees the final import order.
+-- none-ls runs sources in declaration order within the same method.
 null_ls.setup({
-  sources = {
-    null_ls.builtins.diagnostics.mypy,
-    null_ls.builtins.formatting.reorder_python_imports,
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.gofmt,
-    null_ls.builtins.formatting.ocamlformat,
-    null_ls.builtins.formatting.fourmolu,
-    null_ls.builtins.formatting.gleam_format
-  },
-  on_attach = function(client, bufnr)
-    -- Check if this is a null_ls client or supports formatting
-    local is_null_ls = client.name == "null-ls"
-    
-    if is_null_ls then
-      vim.keymap.set("n", "<Leader>f", function()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = bufnr, desc = "[lsp] format" })
+    sources = {
+        -- Python
+        reorder_imports,
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.diagnostics.mypy.with({
+            -- mypy must be installed in the same env as your project.
+            -- If using virtualenvs, set VIRTUAL_ENV or use mason to install mypy.
+            extra_args = { "--ignore-missing-imports" },
+        }),
 
-      -- format on save
-      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-      vim.api.nvim_create_autocmd(event, {
-        buffer = bufnr,
-        group = group,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr, async = async })
-        end,
-        desc = "[lsp] format on save",
-      })
-    end
+        -- JSON / Markdown (prettier handles both)
+        null_ls.builtins.formatting.prettier.with({
+            filetypes = { "json", "markdown", "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+        }),
+    },
 
-    if client.supports_method("textDocument/rangeFormatting") then
-      vim.keymap.set("x", "<Leader>f", function()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = bufnr, desc = "[lsp] format" })
-    end
-  end,
+    on_attach = function(client, bufnr)
+        if client.name ~= "null-ls" then return end
+
+        local opts = { buffer = bufnr, desc = "[lsp] format" }
+
+        -- <Leader>f to format in normal mode
+        vim.keymap.set("n", "<Leader>f", function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end, opts)
+
+        -- <Leader>f to format selection in visual mode
+        vim.keymap.set("x", "<Leader>f", function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end, opts)
+
+        -- Format on save
+        local group = vim.api.nvim_create_augroup("lsp_format_on_save_" .. bufnr, { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            group = group,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr, async = false })
+            end,
+            desc = "[lsp] format on save",
+        })
+    end,
 })

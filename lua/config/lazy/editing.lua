@@ -39,15 +39,6 @@ return {
     end,
   },
 
-  -- Stay centered while scrolling
-  {
-    'arnamak/stay-centered.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('config.plugin.stay_centered')
-    end,
-  },
-
   -- Undo tree
   {
     'mbbill/undotree',
