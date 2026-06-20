@@ -39,6 +39,9 @@ table.insert(plugins, require('config.lazy.languages'))
 -- Miscellaneous
 table.insert(plugins, require('config.lazy.misc'))
 
+-- Fun/visual extras (duck cats, twilight focus dimming)
+table.insert(plugins, require('config.lazy.fun'))
+
 -- Flatten all nested tables into one list for lazy.nvim
 local flattened = {}
 for _, group in ipairs(plugins) do

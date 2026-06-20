@@ -9,6 +9,6 @@ require('trouble').setup({
 vim.keymap.set('n', '<leader>t', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>',
     { desc = 'Trouble: buffer diagnostics' })
 
--- <leader>tw — toggle workspace-wide diagnostics
-vim.keymap.set('n', '<leader>tw', '<cmd>Trouble diagnostics toggle<CR>',
+-- <leader>tr — toggle workspace-wide diagnostics
+vim.keymap.set('n', '<leader>tr', '<cmd>Trouble diagnostics toggle<CR>',
     { desc = 'Trouble: workspace diagnostics' })
