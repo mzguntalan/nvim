@@ -1,7 +1,7 @@
 local duck = require('duck')
 
 -- Edit these freely: every spawn picks a random cat, every cook picks a
--- random dish to turn that duck into.
+-- random dish that cat turns into when caught.
 local cats = { '🐱', '🐈', '😺', '😼' }
 local dishes = { '🥟', '🍜', '🥡', '🍚', '🍢', '🥠' }
 
@@ -9,22 +9,26 @@ local function random_from(pool)
     return pool[math.random(#pool)]
 end
 
--- <leader>zcc — spawn a cat that wanders the buffer
-vim.keymap.set('n', '<leader>zcc', function()
+local M = {}
+
+-- spawn a cat that wanders the buffer
+function M.spawn()
     duck.hatch({
         name = random_from(cats),
         food = random_from(dishes),
     })
-end, { desc = 'Duck: spawn cat' })
+end
 
--- <leader>zxc — cook the cat nearest the cursor
-vim.keymap.set('n', '<leader>zxc', function()
+-- cook the cat nearest the cursor
+function M.cook()
     duck.cook()
-end, { desc = 'Duck: cook nearest cat' })
+end
 
--- <leader>zxx — cook every cat currently on screen
-vim.keymap.set('n', '<leader>zxx', function()
+-- cook every cat currently on screen
+function M.cook_all()
     while #duck.get_ducks() > 0 do
         duck.cook()
     end
-end, { desc = 'Duck: cook all cats' })
+end
+
+return M
