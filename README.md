@@ -4,19 +4,14 @@
 
 ## Overview
 
-The following languages are supported by this human's nvim
+The following languages are supported by this human's nvim (LSP + treesitter + formatting)
 
-- lua
-- html / css
-- python
-- javascript / typescript
-- sql
-- haskell
-- futhark
-- zig
-- ocaml
-- go
-- markdown
+- lua (lua_ls)
+- python (pyright, isort, black, mypy)
+- javascript / typescript / tsx (ts_ls, eslint, prettier)
+- html / css (tailwindcss, prettier)
+- json (prettier)
+- markdown (marksman, vim-markdown, prettier)
 
 ## Installation
 
@@ -94,10 +89,48 @@ pip install black
 ## Basics/ Custom Keymaps (Not vim default)
 
 - Leader = `<space>`
-- Find a file `<leader>fa` (fa = find all)
+
+### General
+
 - Go to file browser: `<leader>pv`
+- Preserve register when pasting over a selection: `<leader>p`
 - Comment a line: `<leader>cv`
 - Comment a block: `<leader>cc`
+- Leap to a position: `<leader>;`
+- Toggle undo tree: `<leader>u`
+- Toggle terminal (float): `<C-\>`
+
+### Find / Telescope
+
+- Find file: `<leader>fa` (fa = find all)
+- Live grep: `<leader>fg`
+- Fuzzy search symbols (aerial): `<leader>fs`
+
+### LSP (active while an LSP client is attached)
+
+- Go to declaration: `gD`
+- Go to definition: `gd`
+- Hover docs: `gs`
+- References: `<leader>rf`
+- Rename symbol: `<leader>re`
+- Code action: `<leader>af`
+- Line diagnostics: `<leader>dd`
+- Signature help (insert mode): `<C-k>`
+- Toggle inlay hints: `<leader>i`
+- Format buffer/selection (normal/visual): `<leader>f` (also runs automatically on save)
+
+### UI / panels
+
+- Toggle symbol outline (aerial): `<leader>o`
+- Toggle buffer diagnostics (trouble): `<leader>t`
+- Toggle workspace diagnostics (trouble): `<leader>tr`
+- Toggle focus dimming (twilight): `<leader>tw`
+
+### Fun
+
+- Spawn a duck: `<leader>zcc`
+- Cook the nearest duck: `<leader>zxc`
+- Cook all ducks: `<leader>zxx`
 
 ## FAQ
 
