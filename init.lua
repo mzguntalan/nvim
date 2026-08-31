@@ -11,6 +11,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.cmd([[filetype plugin indent on]])
 vim.cmd([[syntax enable]])
 
+-- mapleader must be set before lazy.setup so <leader> in plugin `keys` specs
+-- resolves to space instead of the default backslash
+vim.g.mapleader = " "
+
 require("lazy").setup(require("config.lazy"))
 
 require("zolo")

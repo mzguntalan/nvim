@@ -1,9 +1,7 @@
 local duck = require('duck')
 
--- Edit these freely: every spawn picks a random cat, every cook picks a
--- random dish that cat turns into when caught.
+-- Edit freely: every spawn picks a random cat to wander the buffer.
 local cats = { '🐱', '🐈', '😺', '😼' }
-local dishes = { '🥟', '🍜', '🥡', '🍚', '🍢', '🥠' }
 
 local function random_from(pool)
     return pool[math.random(#pool)]
@@ -13,10 +11,7 @@ local M = {}
 
 -- spawn a cat that wanders the buffer
 function M.spawn()
-    duck.hatch({
-        name = random_from(cats),
-        food = random_from(dishes),
-    })
+    duck.hatch(random_from(cats))
 end
 
 -- cook the cat nearest the cursor
@@ -26,9 +21,7 @@ end
 
 -- cook every cat currently on screen
 function M.cook_all()
-    while #duck.get_ducks() > 0 do
-        duck.cook()
-    end
+    duck.cook_all()
 end
 
 return M
