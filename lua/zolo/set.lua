@@ -37,3 +37,6 @@ vim.opt.clipboard:append("unnamedplus")
 
 -- Keep signcolumn always visible (prevents layout shift on LSP attach)
 vim.opt.signcolumn = "yes"
+
+-- Treat all .tex files as LaTeX (otherwise Vim may pick 'plaintex')
+vim.g.tex_flavor = 'latex'

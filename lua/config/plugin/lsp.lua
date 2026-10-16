@@ -30,6 +30,8 @@ local sig_group = vim.api.nvim_create_augroup('user_sig_help', { clear = true })
 vim.api.nvim_create_autocmd('CursorMovedI', {
     group = sig_group,
     callback = function()
+        local clients = vim.lsp.get_clients({ bufnr = 0, method = 'textDocument/signatureHelp' })
+        if #clients == 0 then return end
         local line   = vim.api.nvim_get_current_line()
         local col    = vim.api.nvim_win_get_cursor(0)[2]
         local before = line:sub(1, col)
@@ -93,6 +95,7 @@ require('mason-lspconfig').setup({
         'ts_ls',
         'eslint',
         'tailwindcss',
+        'texlab',
     },
     automatic_enable = true,
 })

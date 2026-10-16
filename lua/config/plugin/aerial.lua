@@ -1,6 +1,7 @@
 require('aerial').setup({
-    -- Only show functions and classes at the top level by default
-    filter_kind = { 'Function', 'Method', 'Class' },
+    -- LaTeX: texlab reports sections/subsections as symbols; show everything
+    backends = { tex = { 'lsp' }, _ = { 'lsp', 'treesitter', 'markdown', 'man' } },
+    filter_kind = { _ = { 'Function', 'Method', 'Class' }, tex = false },
     -- Open aerial in a floating window rather than a split (feels minimal)
     layout = {
         default_direction = 'float',
